@@ -1,5 +1,7 @@
 package com.algaworks.viagem.modelo;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,8 +13,10 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="despesa")
-public class Despesa {
-
+public class Despesa implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
 	private Long codigo;
 	private String descricao;
 	private double valor;

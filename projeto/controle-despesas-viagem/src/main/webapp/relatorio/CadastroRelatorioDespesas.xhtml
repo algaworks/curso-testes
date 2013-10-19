@@ -1,0 +1,51 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:o="http://omnifaces.org/ui">
+
+    <ui:define name="titulo">Novo relatório de despesas</ui:define>
+    
+    <ui:define name="corpo">
+    
+    	<h1>Novo relatório de despesas</h1>
+    	
+    	<h:form id="frmCadastro">
+    		<p:messages id="messages" autoUpdate="true" closable="true" />
+    	
+	    	<p:toolbar style="margin-top: 20px">
+	    		<p:toolbarGroup>
+	    			<p:commandButton value="Salvar" id="botaoSalvar" action="#{cadastroRelatorioDespesasBean.salvar}" update="frmCadastro"/>
+	    		</p:toolbarGroup>
+	    		<p:toolbarGroup align="right">
+					<p:button value="Pesquisa" />
+				</p:toolbarGroup>
+	    	</p:toolbar>
+	    	
+	    	<p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px"
+	    			columnClasses="rotulo, campo">
+	    		<p:outputLabel value="Descrição" for="descricao"/>
+	    		<p:inputText id="descricao" size="80" maxlength="80" value="#{cadastroRelatorioDespesasBean.despesa.descricao}" />
+	    		
+	    		<p:outputLabel value="Valor" for="valor"/>
+	    		<p:inputText id="valor" size="20" maxlength="20" value="#{cadastroRelatorioDespesasBean.despesa.valor}"/>
+
+				<p:outputLabel></p:outputLabel>	    		
+	    		<p:commandButton value="Adicionar" id="botaoAdicionar" action="#{cadastroRelatorioDespesasBean.adicionar}" ajax="false"/>
+	    	</p:panelGrid>
+	    	
+	    	<p:dataTable id="despesasTable" value="#{cadastroRelatorioDespesasBean.relatorioDespesa.despesas}" var="despesa"
+		    		style="width: 50%; margin-top: 20px" emptyMessage="Nenhuma despesa adicionada." paginator="false" >
+		    		<p:column headerText="Descrição">
+		    			<h:outputText value="#{despesa.descricao}" />
+		    		</p:column>
+		    		<p:column headerText="Valor">
+		    			<h:outputText value="#{despesa.valor}" />
+		    		</p:column>
+		    </p:dataTable>
+	    	
+    	</h:form>
+    </ui:define>
+</ui:composition>

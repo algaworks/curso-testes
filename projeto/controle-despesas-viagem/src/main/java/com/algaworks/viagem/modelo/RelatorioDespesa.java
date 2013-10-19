@@ -1,5 +1,6 @@
 package com.algaworks.viagem.modelo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,8 +14,10 @@ import javax.persistence.Transient;
 
 @Entity
 @Table(name="relatorio_despesa")
-public class RelatorioDespesa {
+public class RelatorioDespesa implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private Long codigo;
 	private List<Despesa> despesas;
 	
