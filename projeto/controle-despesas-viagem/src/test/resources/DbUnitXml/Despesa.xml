@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<dataset>
+	<despesa codigo="1" descricao="Taxi" valor="15.5" codigo_relatorio_despesa="1"/>
+	<despesa codigo="2" descricao="Alimentação" valor="25.0" codigo_relatorio_despesa="1"/>
+</dataset>
