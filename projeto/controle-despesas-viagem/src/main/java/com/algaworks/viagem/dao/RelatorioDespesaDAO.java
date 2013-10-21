@@ -1,19 +1,25 @@
 package com.algaworks.viagem.dao;
 
+import java.io.Serializable;
+
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import com.algaworks.viagem.modelo.RelatorioDespesa;
+import com.algaworks.viagem.util.jpa.Transactional;
 
-public class RelatorioDespesaDAO {
+public class RelatorioDespesaDAO implements Serializable {
 
 	private EntityManager manager;
-	
+
+	@Inject
 	public RelatorioDespesaDAO(EntityManager manager) {
 		this.manager = manager;
 	}
 
+	@Transactional
 	public void salvar(RelatorioDespesa relatorioDespesa) {
-		System.out.println("Salvando no banco de dados...");
+		manager.persist(relatorioDespesa);
 	}
 	
 	public RelatorioDespesa buscarPeloCodigo(Long codigo) {
