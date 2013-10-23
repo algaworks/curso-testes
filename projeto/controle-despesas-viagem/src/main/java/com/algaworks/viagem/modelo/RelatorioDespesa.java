@@ -34,7 +34,7 @@ public class RelatorioDespesa implements Serializable {
 		this.codigo = codigo;
 	}
 
-	@OneToMany(mappedBy="despesa")
+	@OneToMany(mappedBy="relatorioDespesa")
 	public List<Despesa> getDespesas() {
 		return despesas;
 	}

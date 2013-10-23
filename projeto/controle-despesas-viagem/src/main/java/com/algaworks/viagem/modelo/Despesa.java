@@ -20,7 +20,7 @@ public class Despesa implements Serializable {
 	private Long codigo;
 	private String descricao;
 	private double valor;
-	private Despesa despesa;
+	private RelatorioDespesa relatorioDespesa;
 
 	public Despesa() {
 	}
@@ -56,11 +56,11 @@ public class Despesa implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name="codigo_relatorio_despesa")
-	public Despesa getDespesa() {
-		return despesa;
+	public RelatorioDespesa getRelatorioDespesa() {
+		return relatorioDespesa;
 	}
-	public void setDespesa(Despesa despesa) {
-		this.despesa = despesa;
+	public void setRelatorioDespesa(RelatorioDespesa relatorioDespesa) {
+		this.relatorioDespesa = relatorioDespesa;
 	}
 
 	@Override
