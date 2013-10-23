@@ -14,7 +14,6 @@ public class EntityManagerProducer {
 	private EntityManagerFactory factory;
 
 	public EntityManagerProducer() {
-		System.out.println(">#>#>#>#>#>#>##################################S");
 		this.factory = Persistence.createEntityManagerFactory("controleDepesasViagemPU");
 	}
 

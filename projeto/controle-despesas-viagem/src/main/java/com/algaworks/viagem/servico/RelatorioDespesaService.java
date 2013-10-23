@@ -1,13 +1,26 @@
 package com.algaworks.viagem.servico;
 
+import java.io.Serializable;
+
+import javax.inject.Inject;
+
 import com.algaworks.viagem.dao.RelatorioDespesaDAO;
 import com.algaworks.viagem.modelo.RelatorioDespesa;
+import com.algaworks.viagem.util.jpa.Transactional;
 
-public class RelatorioDespesaService {
+public class RelatorioDespesaService implements Serializable {
 
-	RelatorioDespesaDAO relatorioDespesaDAO;
+	private static final long serialVersionUID = 1L;
 	
-	public void salvar(RelatorioDespesa relatorioDespesa) {
+	private RelatorioDespesaDAO relatorioDespesaDAO;
+
+	@Inject
+	public RelatorioDespesaService(RelatorioDespesaDAO relatorioDespesaDAO) {
+		this.relatorioDespesaDAO = relatorioDespesaDAO;
+	}
+
+	@Transactional
+	public void salvar(RelatorioDespesa relatorioDespesa) throws NegocioException {
 		// Alguma regra de negócio
 		validar(relatorioDespesa);
 		
@@ -15,9 +28,9 @@ public class RelatorioDespesaService {
 		this.relatorioDespesaDAO.salvar(relatorioDespesa);
 	}
 
-	private void validar(RelatorioDespesa relatorioDespesa) {
+	private void validar(RelatorioDespesa relatorioDespesa) throws NegocioException {
 		if (!possuiDespesa(relatorioDespesa)) {
-			throw new IllegalArgumentException("É necessário ter pelo menos uma despesa no relatório.");
+			throw new NegocioException("É necessário ter pelo menos uma despesa no relatório.");
 		}
 	}
 

@@ -7,9 +7,10 @@ import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.algaworks.viagem.dao.RelatorioDespesaDAO;
 import com.algaworks.viagem.modelo.Despesa;
 import com.algaworks.viagem.modelo.RelatorioDespesa;
+import com.algaworks.viagem.servico.NegocioException;
+import com.algaworks.viagem.servico.RelatorioDespesaService;
 import com.algaworks.viagem.util.jsf.FacesUtil;
 
 @Named
@@ -22,7 +23,7 @@ public class CadastroRelatorioDespesasBean implements Serializable {
 	private Despesa despesa;
 	
 	@Inject
-	private RelatorioDespesaDAO relatorioDespesaDAO;
+	private RelatorioDespesaService relatorioDespesaService;
 	
 	@PostConstruct
 	public void init() {
@@ -36,9 +37,13 @@ public class CadastroRelatorioDespesasBean implements Serializable {
 	}
 	
 	public void salvar() {
-		relatorioDespesaDAO.salvar(this.relatorioDespesa);
-		this.relatorioDespesa = new RelatorioDespesa();
-		FacesUtil.addSuccessMessage("Relatório salvo com sucesso!");
+		try { 
+			relatorioDespesaService.salvar(this.relatorioDespesa);
+			this.relatorioDespesa = new RelatorioDespesa();
+			FacesUtil.addSuccessMessage("Relatório salvo com sucesso!");
+		} catch (NegocioException e) {
+			FacesUtil.addErrorMessage(e.getMessage());
+		}
 	}
 	
 	private void clean() {
