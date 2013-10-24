@@ -1,0 +1,57 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="titulo">Pesquisa de Relatório de Despesas</ui:define>
+    
+    <ui:define name="corpo">
+    	<h1>Pesquisa de Relatório de Despesas</h1>
+    	
+    	<h:form id="frmPesquisa">
+    		<p:messages id="messages" autoUpdate="true" closable="true" />
+    		
+    		<p:toolbar style="margin-top: 20px">
+    			<p:toolbarGroup>
+    				<p:commandButton value="Novo" id="botaoNovo" action="/relatorio/CadastroRelatorioDespesas.xhtml"/>
+    			</p:toolbarGroup>
+    		</p:toolbar>
+    	
+	    	<p:dataTable id="relatoriosTable" value="#{pesquisaRelatorioDespesasBean.relatoriosDespesas}" var="relatorioDespesa"
+		    		style="margin-top: 20px" emptyMessage="Nenhum relatório de despesa encontrado." rows="20"
+		    		paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+		    		
+		    		<p:columnGroup type="header">  
+			            <p:row>  
+			                <p:column rowspan="2" headerText="Relatório de Despesa" />  
+			                <p:column colspan="2" headerText="Despesas" />  
+			            </p:row>  
+			  
+			            <p:row>  
+			                <p:column headerText="Descrição" />  
+			                <p:column headerText="Valor" />  
+			            </p:row>  
+			        </p:columnGroup>
+		    		
+		    		<p:subTable var="despesa" value="#{relatorioDespesa.despesas}">
+			    		<f:facet name="header">
+			    			<h:outputText value="Motivo: #{relatorioDespesa.motivo}"/>
+			    		</f:facet>
+			    		<p:column headerText="Código" style="text-align: center; width: 200px">
+		    				<h:outputText value="#{despesa.codigo}" />
+		    			</p:column>
+		    			<p:column headerText="Descrição" style="text-align: center">
+		    				<h:outputText value="#{despesa.descricao}" />
+		    			</p:column>
+		    			<p:column headerText="Valor" style="text-align: center">
+		    				<h:outputText value="#{despesa.valor}" />
+		    			</p:column>
+		    		</p:subTable>
+		    		
+		    </p:dataTable>
+		    
+	    </h:form>
+    </ui:define>
+</ui:composition>
