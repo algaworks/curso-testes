@@ -25,6 +25,9 @@ public class CadastroRelatorioDespesasBean implements Serializable {
 	@Inject
 	private RelatorioDespesaService relatorioDespesaService;
 	
+	@Inject
+	private FacesUtil facesUtil;
+	
 	@PostConstruct
 	public void init() {
 		this.clean();
@@ -40,9 +43,9 @@ public class CadastroRelatorioDespesasBean implements Serializable {
 		try { 
 			relatorioDespesaService.salvar(this.relatorioDespesa);
 			this.relatorioDespesa = new RelatorioDespesa();
-			FacesUtil.addSuccessMessage("Relatório salvo com sucesso!");
+			facesUtil.info("Relatório salvo com sucesso!");
 		} catch (NegocioException e) {
-			FacesUtil.addErrorMessage(e.getMessage());
+			facesUtil.error(e.getMessage());
 		}
 	}
 	
